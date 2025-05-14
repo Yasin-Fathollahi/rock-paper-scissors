@@ -8,55 +8,52 @@ const CommonStyles =
   'rounded-full flex items-center justify-center cursor-pointer ';
 
 const buttonInnerDivClasses =
-  'bg-stone-100 p-3 rounded-full w-3/4 h-3/4 inset-shadow-sm inset-shadow-stone-500 active';
+  'bg-stone-100 p-3 rounded-full w-3/4 h-3/4 inset-shadow-sm inset-shadow-stone-500';
 
 const buttonInfo = {
   scissors: {
-    gradient: '#ec9e0e,#eca922',
+    gradient: 'bg-linear-[#ec9e0e,#eca922]',
     position: 'top-0 left-1/2 -translate-x-1/2 -translate-y-1/3',
     path: scissors,
   },
   paper: {
-    gradient: '#4865f4,#5671f5',
+    gradient: 'bg-linear-[#4865f4,#5671f5]',
     position: 'top-1/5 right-0 translate-x-1/4 lg:translate-y-0',
     path: paper,
   },
   rock: {
-    gradient: '#dc2e4e,#dd405d',
+    gradient: 'bg-linear-[#dc2e4e,#dd405d]',
     position:
       'bottom-0 right-0 translate-y-1/3 md:-translate-x-1/4 lg:-translate-x-1/5',
     path: rock,
   },
   lizard: {
-    gradient: '#834fe3,#8c5de5',
+    gradient: 'bg-linear-[#834fe3,#8c5de5]',
     position:
       'bottom-0 left-0 translate-y-1/3 md:translate-x-1/4 lg:translate-x-1/5',
     path: lizard,
   },
   spock: {
-    gradient: '#40b9ce,#52bed1',
+    gradient: 'bg-linear-[#40b9ce,#52bed1]',
     position: 'top-1/5 left-0 -translate-x-1/4 lg:translate-y-0',
     path: spock,
   },
 };
 
-export default function Choice({ type, absolute }) {
+export default function Choice({ type, absolute, onSelectMove }) {
   const coditionedStyles = absolute
     ? `absolute w-15 h-15 sm:w-20 sm:h-20 lg:w-30 lg:h-30 transition-all duration-300 hover:scale-110 ${buttonInfo[type].position}`
-    : 'w-20 h-20 sm:w-25 sm:h-25 lg:w-35 lg:h-35';
+    : 'w-35 h-35 lg:w-50 lg:h-50';
 
-  const classes = `${CommonStyles} ${coditionedStyles} bg-linear-[${buttonInfo[type].gradient}]`;
+  const btnClasses = `${CommonStyles} ${coditionedStyles} ${buttonInfo[type].gradient}`;
+  const imgClasses = `w-full ${
+    type === 'spock' ? 'p-0.5 pt-0 lg:p-2 lg:pt-0' : 'lg:p-2'
+  } ${absolute ? '' : 'p-2 lg:p-5'}`;
 
   return (
-    <button className={classes}>
+    <button className={btnClasses} onClick={absolute && onSelectMove}>
       <div className={buttonInnerDivClasses}>
-        <img
-          className={`w-full ${
-            type === 'spock' ? 'p-0.5 pt-0 lg:p-2 lg:pt-0' : 'lg:p-2'
-          }`}
-          src={buttonInfo[type].path}
-          alt={type}
-        />
+        <img className={imgClasses} src={buttonInfo[type].path} alt={type} />
       </div>
     </button>
   );
