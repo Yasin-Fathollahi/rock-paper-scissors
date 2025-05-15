@@ -1,10 +1,12 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef } from 'react';
 import Header from './components/Header.jsx';
 import Choices from './components/Choices.jsx';
 import Result from './components/Result.jsx';
+import Modal from './components/Modal.jsx';
 export default function App() {
   const [playerMove, setPlayerMove] = useState('');
   const [score, setScore] = useState(0);
+  const [isOpen, setIsOpen] = useState(false);
 
   function handleSelectMove(type) {
     setPlayerMove(type);
@@ -24,6 +26,10 @@ export default function App() {
     setPlayerMove('');
   }
 
+  const handleShowModal = useCallback(function (modalState) {
+    setIsOpen(modalState);
+  }, []);
+
   return (
     <main className="h-full flex flex-col p-4 sm:p-8">
       <div className="flex flex-col flex-auto w-full max-w-4xl mx-auto sm:gap-15 lg:gap-20">
@@ -39,10 +45,14 @@ export default function App() {
         )}
       </div>
       <div className="flex justify-center sm:justify-end">
-        <button className="text-white font-semibold uppercase border-[#606e85] border-2 rounded-lg py-2 px-8 cursor-pointer hover:border-white">
+        <button
+          onClick={handleShowModal}
+          className="text-white font-semibold uppercase border-[#606e85] border-2 rounded-lg py-2 px-8 cursor-pointer hover:border-white"
+        >
           rules
         </button>
       </div>
+      <Modal isOpen={isOpen} onSetIsOpen={handleShowModal} />
     </main>
   );
 }

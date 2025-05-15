@@ -54,6 +54,7 @@ export default function Choice({ type, absolute, onSelectMove }) {
       className={btnClasses}
       onClick={absolute && onSelectMove.bind(null, type)}
     >
+      {/* <div className='translate-'></div> */}
       <div className={buttonInnerDivClasses}>
         <img className={imgClasses} src={buttonInfo[type].path} alt={type} />
       </div>
