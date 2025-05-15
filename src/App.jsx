@@ -3,7 +3,7 @@ import Header from './components/Header.jsx';
 import Choices from './components/Choices.jsx';
 import Result from './components/Result.jsx';
 import Modal from './components/Modal.jsx';
-import Context from './store/Context.jsx';
+import { Context } from './store/Context.jsx';
 export default function App() {
   const [playerMove, setPlayerMove] = useState('');
   const [score, setScore] = useState(0);

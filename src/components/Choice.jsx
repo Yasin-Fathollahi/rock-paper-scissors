@@ -45,7 +45,7 @@ export default function Choice({ type, absolute }) {
   const ctxValue = useContext(Context);
 
   const coditionedStyles = absolute
-    ? `absolute w-15 h-15 sm:w-20 sm:h-20 lg:w-30 lg:h-30 cursor-pointer transition-all duration-300 hover:scale-110 ${buttonInfo[type].position}`
+    ? `absolute w-16 h-16 sm:w-20 sm:h-20 lg:w-30 lg:h-30 cursor-pointer transition-all duration-300 hover:scale-110 ${buttonInfo[type].position}`
     : 'w-30 h-30 lg:w-50 lg:h-50';
 
   const btnClasses = `${CommonStyles} ${coditionedStyles} ${buttonInfo[type].gradient}`;
