@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+import { Context } from '../store/Context';
 import scissors from '../assets/images/icon-scissors.svg';
 import paper from '../assets/images/icon-paper.svg';
 import rock from '../assets/images/icon-rock.svg';
@@ -39,7 +41,9 @@ const buttonInfo = {
   },
 };
 
-export default function Choice({ type, absolute, onSelectMove }) {
+export default function Choice({ type, absolute }) {
+  const ctxValue = useContext(Context);
+
   const coditionedStyles = absolute
     ? `absolute w-15 h-15 sm:w-20 sm:h-20 lg:w-30 lg:h-30 cursor-pointer transition-all duration-300 hover:scale-110 ${buttonInfo[type].position}`
     : 'w-30 h-30 lg:w-50 lg:h-50';
@@ -52,9 +56,8 @@ export default function Choice({ type, absolute, onSelectMove }) {
   return (
     <button
       className={btnClasses}
-      onClick={absolute && onSelectMove.bind(null, type)}
+      onClick={absolute && ctxValue.onSelectMove.bind(null, type)}
     >
-      {/* <div className='translate-'></div> */}
       <div className={buttonInnerDivClasses}>
         <img className={imgClasses} src={buttonInfo[type].path} alt={type} />
       </div>

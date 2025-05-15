@@ -3,17 +3,17 @@ import Choice from './Choice.jsx';
 import FinalResult from './FinalResult.jsx';
 import checkResult from '../assets/check_winner.js';
 
-const moves = ['scissors', 'paper', 'rock', 'lizard', 'spock'];
+const MOVES = ['scissors', 'paper', 'rock', 'lizard', 'spock'];
 const userVW = window.innerWidth;
 
-export default function Result({ playerMove, onUpdateScore, onRematch }) {
+export default function Result({ playerMove, onUpdateScore }) {
   const [result, setResult] = useState('');
   const computerMove = useRef();
 
   useEffect(() => {
     const timer = setTimeout(() => {
       const computerMoveIndex = Math.floor(Math.random() * 5);
-      computerMove.current = moves[computerMoveIndex];
+      computerMove.current = MOVES[computerMoveIndex];
       setResult(() => {
         return checkResult(playerMove, computerMove.current);
       });
@@ -34,11 +34,7 @@ export default function Result({ playerMove, onUpdateScore, onRematch }) {
           <Choice type={playerMove} />
         </div>
         {result !== '' && userVW >= 640 ? (
-          <FinalResult
-            result={result}
-            onUpdateScore={onUpdateScore}
-            onRematch={onRematch}
-          />
+          <FinalResult result={result} onUpdateScore={onUpdateScore} />
         ) : undefined}
 
         <div className="flex flex-col items-center gap-8">
@@ -53,11 +49,7 @@ export default function Result({ playerMove, onUpdateScore, onRematch }) {
         </div>
       </div>
       {result !== '' && userVW < 640 ? (
-        <FinalResult
-          result={result}
-          onUpdateScore={onUpdateScore}
-          onRematch={onRematch}
-        />
+        <FinalResult result={result} onUpdateScore={onUpdateScore} />
       ) : undefined}
     </div>
   );

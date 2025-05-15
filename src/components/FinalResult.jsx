@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
-export default function FinalResult({ result, onUpdateScore, onRematch }) {
+import { useEffect, useState, useContext } from 'react';
+import { Context } from '../store/Context';
+export default function FinalResult({ result, onUpdateScore }) {
   const [resultText, setResultText] = useState('');
-
+  const ctxValue = useContext(Context);
   useEffect(() => {
     if (result === null) {
       setResultText('draw');
@@ -15,7 +16,7 @@ export default function FinalResult({ result, onUpdateScore, onRematch }) {
   }, [onUpdateScore, result]);
 
   function handleRematch() {
-    onRematch();
+    ctxValue.onRematch();
   }
 
   return (

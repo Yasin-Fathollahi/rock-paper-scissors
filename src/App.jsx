@@ -3,6 +3,7 @@ import Header from './components/Header.jsx';
 import Choices from './components/Choices.jsx';
 import Result from './components/Result.jsx';
 import Modal from './components/Modal.jsx';
+import Context from './store/Context.jsx';
 export default function App() {
   const [playerMove, setPlayerMove] = useState('');
   const [score, setScore] = useState(0);
@@ -30,19 +31,25 @@ export default function App() {
     setIsOpen(modalState);
   }, []);
 
+  const ctxValue = {
+    onSelectMove: handleSelectMove,
+    onRematch: handleRematch,
+  };
+
   return (
     <main className="h-full flex flex-col p-4 sm:p-8">
       <div className="flex flex-col flex-auto w-full max-w-4xl mx-auto sm:gap-15 lg:gap-20">
-        <Header score={score} />
-        {playerMove === '' && <Choices onSelectMove={handleSelectMove} />}
-        {playerMove && (
-          <Result
-            playerMove={playerMove}
-            onUpdateScore={handleSetScore}
-            score={score}
-            onRematch={handleRematch}
-          />
-        )}
+        <Context value={ctxValue}>
+          <Header score={score} />
+          {playerMove === '' && <Choices />}
+          {playerMove && (
+            <Result
+              playerMove={playerMove}
+              onUpdateScore={handleSetScore}
+              score={score}
+            />
+          )}
+        </Context>
       </div>
       <div className="flex justify-center sm:justify-end">
         <button
