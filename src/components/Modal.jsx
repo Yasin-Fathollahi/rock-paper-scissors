@@ -1,4 +1,5 @@
 import { useRef, useEffect, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import rules from '../assets/images/image-rules-bonus.svg';
 export default function Modal({ isOpen, onSetIsOpen }) {
   const dialog = useRef();
@@ -20,7 +21,7 @@ export default function Modal({ isOpen, onSetIsOpen }) {
     }
   }, [isOpen, onSetIsOpen, closeModal]);
 
-  return (
+  return createPortal(
     <dialog
       onClose={closeModal}
       ref={dialog}
@@ -45,6 +46,7 @@ export default function Modal({ isOpen, onSetIsOpen }) {
           />
         </svg>
       </button>
-    </dialog>
+    </dialog>,
+    document.getElementById('modal')
   );
 }

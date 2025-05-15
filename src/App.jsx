@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef } from 'react';
+import { useState, useCallback } from 'react';
 import Header from './components/Header.jsx';
 import Choices from './components/Choices.jsx';
 import Result from './components/Result.jsx';

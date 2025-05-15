@@ -25,7 +25,7 @@ export default function FinalResult({ result, onUpdateScore, onRematch }) {
       </p>
       <button
         onClick={handleRematch}
-        className="uppercase w-full py-2 bg-white rounded-lg font-semibold cursor-pointer transition-all duration-300 hover:scale-110"
+        className="uppercase w-fit sm:w-full py-2 px-4 bg-white rounded-lg font-semibold cursor-pointer transition-all duration-300 hover:scale-110"
       >
         play again
       </button>
